@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth md:snap-y md:snap-mandatory">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Programmer Chandra - Jelajahi kekayaan budaya, sejarah, tokoh, dan tradisi Sedekah Bumi Indonesia.">
+    <meta name="theme-color" content="#101b35">
+
+    <title>Jelajah Sedekah Bumi</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- TAILWIND CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#101b35',
+                            navy: '#142747',
+                            blue: '#2563eb',
+                            blueDark: '#1746b5',
+                            orange: '#ff9f1c',
+                            orangeLight: '#fff0d8',
+                            light: '#f6f8fc',
+                        }
+                    },
+                    animation: {
+                        'float': 'floating 4.5s ease-in-out infinite',
+                        'float-slow': 'floating 7s ease-in-out infinite',
+                        'spin-slow': 'spin 18s linear infinite',
+                    },
+                    keyframes: {
+                        floating: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- CUSTOM CSS PENDUKUNG -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="font-sans text-brand-dark bg-white overflow-x-hidden antialiased selection:bg-brand-orange selection:text-brand-dark">
+
+    <!-- PROGRESS BAR -->
+    <div id="progressBar" class="fixed top-0 left-0 w-0 h-1 bg-gradient-to-r from-brand-orange via-amber-300 to-brand-blue z-[99999] transition-all duration-150"></div>
+
+    <!-- NAVBAR -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full h-[64px] md:h-[72px] bg-brand-dark/95 backdrop-blur-md z-50 shadow-lg border-b border-white/10 transition-all duration-300">
+        <div class="w-[92%] max-w-[1180px] mx-auto h-full flex items-center justify-between">
+
+            <!-- LOGO TAILWIND CSS -->
+            <a href="#home" class="flex items-center gap-2.5 shrink-0 group">
+                <svg class="w-8 h-7 text-[#38bdf8] transition-transform duration-300 group-hover:scale-105" viewBox="0 0 54 33" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M27 0C19.8 0 15.3 3.6 13.5 10.8C16.2 7.2 19.35 5.85 22.95 6.75C25.004 7.263 26.472 8.763 28.098 10.425C30.744 13.128 33.804 16.254 40.5 16.254C47.7 16.254 52.2 12.654 54 5.454C51.3 9.054 48.15 10.404 44.55 9.504C42.496 8.991 41.028 7.491 39.402 5.829C36.756 3.126 33.696 0 27 0ZM13.5 16.254C6.3 16.254 1.8 19.854 0 27.054C2.7 23.454 5.85 22.104 9.45 23.004C11.504 23.517 12.972 25.017 14.598 26.679C17.244 29.382 20.304 32.508 27 32.508C34.2 32.508 38.7 28.908 40.5 21.708C37.8 25.308 34.65 26.658 31.05 25.758C28.996 25.245 27.528 23.745 25.902 22.083C23.256 19.38 20.196 16.254 13.5 16.254Z"/>
+                </svg>
+                <span class="text-white font-bold text-sm md:text-base tracking-tight"></span>
+            </a>
+
+            <!-- MOBILE BUTTON -->
+            <button id="menuToggle"
+                    aria-label="Buka menu"
+                    aria-expanded="false"
+                    aria-controls="menu"
+                    class="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 z-50 focus:outline-none">
+                <span class="block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-white rounded transition-all duration-300"></span>
+            </button>
+
+            <!-- MENU -->
+            <div id="menu" class="menu absolute md:static top-[64px] left-0 w-full md:w-auto max-h-0 md:max-h-none overflow-hidden md:overflow-visible bg-brand-dark md:bg-transparent border-t md:border-none border-white/10 shadow-xl md:shadow-none transition-all duration-300">
+                <ul class="flex flex-col md:flex-row items-stretch md:items-center gap-1.5 md:gap-2 p-4 md:p-0">
+                    <li><a href="#home" class="nav-link active block px-3.5 py-2 text-xs md:text-[13px] font-medium text-slate-200 hover:text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-all">Beranda</a></li>
+                    <li><a href="#pustaka" class="nav-link block px-3.5 py-2 text-xs md:text-[13px] font-medium text-slate-200 hover:text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-all">Sejarah & Filosofi</a></li>
+                    <li><a href="#tokoh" class="nav-link block px-3.5 py-2 text-xs md:text-[13px] font-medium text-slate-200 hover:text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-all">Rangkaian Prosesi</a></li>
+                    <li><a href="#agenda" class="nav-link block px-3.5 py-2 text-xs md:text-[13px] font-medium text-slate-200 hover:text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-all">Ragam Daerah</a></li>
+                    <li><a href="#indonesia-kaya" class="nav-link block px-3.5 py-2 text-xs md:text-[13px] font-medium text-slate-200 hover:text-brand-orange hover:bg-brand-orange/10 rounded-lg transition-all">Galeri & Arsip</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- =========================
+             LAYAR 1: HOME / HERO
+        ========================== -->
+        <section id="home" class="relative min-h-screen md:h-screen md:snap-start pt-[72px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#f8faff] via-[#eff5ff] to-[#e4eeff]">
+            <div class="absolute top-16 right-10 w-72 h-72 bg-brand-blue/15 rounded-full blur-3xl pointer-events-none animate-float-slow"></div>
+            <div class="absolute bottom-10 left-10 w-72 h-72 bg-brand-orange/15 rounded-full blur-3xl pointer-events-none animate-float-slow [animation-delay:2s]"></div>
+
+            <div class="w-[92%] max-w-[1180px] mx-auto py-8 md:py-0 grid grid-cols-1 md:grid-cols-12 items-center gap-8 md:gap-10 relative z-10">
+
+                <!-- Teks Hero -->
+                <div class="md:col-span-6 text-center md:text-left reveal-left">
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-[50px] font-extrabold leading-[1.15] tracking-tight text-brand-dark my-4">
+                        Tradisi
+                        <span class="block bg-gradient-to-r from-brand-blue via-blue-600 to-brand-orange bg-clip-text text-transparent">
+                            Sedekah Bumi.
+                        </span>
+                    </h1>
+
+                    <p class="text-slate-600 text-xs sm:text-sm md:text-[14.5px] leading-relaxed max-w-lg mx-auto md:mx-0">
+                        Adalah sebuah tradisi adat dan budaya masyarakat Nusantara—khususnya di Pulau Jawa—yang dilakukan sebagai bentuk rasa syukur kepada Tuhan Yang Maha Esa atas limpahan rezeki dan hasil bumi dari alam.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 my-6">
+                        <a href="#pustaka" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs md:text-[13px] font-bold text-white bg-gradient-to-r from-brand-blue to-brand-blueDark hover:from-brand-orange hover:to-amber-400 hover:text-brand-dark shadow-lg shadow-brand-blue/25 transition-all duration-300 transform hover:-translate-y-0.5">
+                            Jelajahi Sekarang <span>→</span>
+                        </a>
+                        <a href="#tokoh" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs md:text-[13px] font-bold text-brand-dark bg-white hover:bg-slate-50 border border-slate-200 shadow-sm transition-all duration-300 transform hover:-translate-y-0.5">
+                            Lihat Prosesi
+                        </a>
+                    </div>
+
+                    <!-- Statistik -->
+                    <div class="grid grid-cols-3 gap-4 max-w-md mx-auto md:mx-0 pt-1">
+                        <div class="pl-3 border-l-[3px] border-brand-orange text-left">
+                            <h3 class="text-lg sm:text-xl font-extrabold text-brand-blue"><span class="counter" data-target="17000">0</span>+</h3>
+                            <p class="text-[11px] text-slate-500">Pulau Indonesia</p>
+                        </div>
+                        <div class="pl-3 border-l-[3px] border-brand-orange text-left">
+                            <h3 class="text-lg sm:text-xl font-extrabold text-brand-blue"><span class="counter" data-target="38">0</span></h3>
+                            <p class="text-[11px] text-slate-500">Provinsi</p>
+                        </div>
+                        <div class="pl-3 border-l-[3px] border-brand-orange text-left">
+                            <h3 class="text-lg sm:text-xl font-extrabold text-brand-blue"><span class="counter" data-target="1340">0</span>+</h3>
+                            <p class="text-[11px] text-slate-500">Suku Bangsa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gambar Hero -->
+                <div class="md:col-span-6 relative flex items-center justify-center reveal-right">
+                    <div class="absolute w-64 h-64 sm:w-80 sm:h-80 border-2 border-dashed border-brand-blue/20 rounded-full animate-spin-slow -z-10"></div>
+                    <img
+                        src="img/budayaindonesia.png"
+                        alt="Ilustrasi Budaya Nusantara"
+                        fetchpriority="high"
+                        class="w-full max-w-[380px] lg:max-w-[420px] bg-white/90 backdrop-blur-sm p-5 rounded-3xl border-[5px] border-white shadow-2xl animate-float">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =========================
+             LAYAR 2: SEJARAH & FILOSOFI
+        ========================== -->
+        <section id="pustaka" class="relative min-h-screen md:h-screen md:snap-start pt-[72px] flex items-center justify-center bg-slate-50/90 overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-60"></div>
+                <div class="absolute -top-24 -left-24 w-72 h-72 bg-brand-blue/10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-brand-orange/10 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative z-10 w-[92%] max-w-[1180px] mx-auto py-8 md:py-0">
+                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8 reveal">
+
+                    <h2 class="mt-2.5 mb-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark tracking-tight">
+                        Sejarah & Filosofi <span class="bg-gradient-to-r from-brand-blue to-brand-orange bg-clip-text text-transparent">Sedekah Bumi</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Berakar dari peradaban agraris kuno Nusantara yang memandang alam bukan sekadar objek eksploitasi, melainkan sumber kehidupan yang harus dihormati.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div class="reveal delay-100 bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue font-extrabold text-sm flex items-center justify-center mb-3.5 group-hover:bg-brand-blue group-hover:text-white transition-colors">01</div>
+                        <h3 class="text-base font-bold text-brand-dark mb-2 group-hover:text-brand-blue transition-colors">Latar Belakang Sejarah & Akulturasi</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Tradisi sedekah bumi terbentuk melalui perpaduan tiga fase peradaban di Nusantara, khususnya di tanah Jawa, yang selaras dengan nilai spiritual dan kearifan lokal.
+                        </p>
+                    </div>
+
+                    <div class="reveal delay-200 bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 text-brand-orange font-extrabold text-sm flex items-center justify-center mb-3.5 group-hover:bg-brand-orange group-hover:text-brand-dark transition-colors">02</div>
+                        <h3 class="text-base font-bold text-brand-dark mb-2 group-hover:text-brand-blue transition-colors">Filosofi Hamemayu Hayuning Bawana</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Di balik tumpukan hasil panen dan nasi tumpeng, tersimpan pandangan hidup untuk menjaga kelestarian alam semesta sebagai wujud syukur kepada Tuhan Yang Maha Esa.
+                        </p>
+                    </div>
+
+                    <div class="reveal delay-300 bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue font-extrabold text-sm flex items-center justify-center mb-3.5 group-hover:bg-brand-blue group-hover:text-white transition-colors">03</div>
+                        <h3 class="text-base font-bold text-brand-dark mb-2 group-hover:text-brand-blue transition-colors">Gotong Royong & Harmoni Sosial</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Secara sosiologis, sedekah bumi berfungsi sebagai "mesin sosial" yang merawat ikatan komunal dan kerukunan masyarakat desa melalui partisipasi aktif setiap tahapannya.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             LAYAR 3: RANGKAIAN PROSESI
+        ========================== -->
+        <section id="tokoh" class="relative min-h-screen md:h-screen md:snap-start pt-[72px] flex items-center justify-center bg-brand-light overflow-hidden">
+            <!-- Dekorasi Latar & Cahaya Animasi -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:24px_24px] opacity-50"></div>
+                <div class="absolute -top-24 right-10 w-72 h-72 bg-brand-blue/10 rounded-full blur-3xl animate-float-slow"></div>
+                <div class="absolute -bottom-24 left-10 w-72 h-72 bg-brand-orange/15 rounded-full blur-3xl animate-float-slow [animation-delay:2.5s]"></div>
+            </div>
+
+            <div class="relative z-10 w-[92%] max-w-[1180px] mx-auto py-8 md:py-0">
+                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8 reveal">
+                    <h2 class="mt-2.5 mb-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark tracking-tight">
+                        Rangkaian Prosesi <span class="bg-gradient-to-r from-brand-blue to-brand-orange bg-clip-text text-transparent">Sedekah Bumi</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Berlangsung secara runtut dari tahap pembersihan lingkungan hingga puncaknya berupa doa bersama dan pesta rakyat.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+                    <!-- Prosesi 1 -->
+                    <div class="reveal delay-100 group relative overflow-hidden flex items-start gap-3.5 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-blue/40 transition-all duration-300">
+                        <span class="shrink-0 w-9 h-9 rounded-full bg-brand-dark text-white font-bold text-xs flex items-center justify-center shadow transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-brand-blue">1</span>
+                        <div class="flex-1">
+                            <h3 class="text-sm sm:text-base font-bold text-brand-dark mb-1 group-hover:text-brand-blue transition-colors">Tahap Persiapan & Bersih Desa (Gugur Gunung)</h3>
+                            <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">Dilakukan beberapa hari sebelum acara puncak sebagai simbol penyucian lingkungan fisik dan batin warga desa secara bergotong royong.</p>
+                        </div>
+                        <span class="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-brand-blue to-brand-orange group-hover:w-full transition-all duration-500"></span>
+                    </div>
+
+                    <!-- Prosesi 2 -->
+                    <div class="reveal delay-200 group relative overflow-hidden flex items-start gap-3.5 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-blue/40 transition-all duration-300">
+                        <span class="shrink-0 w-9 h-9 rounded-full bg-brand-blue text-white font-bold text-xs flex items-center justify-center shadow transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-brand-orange group-hover:text-brand-dark">2</span>
+                        <div class="flex-1">
+                            <h3 class="text-sm sm:text-base font-bold text-brand-dark mb-1 group-hover:text-brand-blue transition-colors">Kirab Budaya & Arak-Arakan Hasil Bumi</h3>
+                            <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">Pembuka acara puncak yang paling meriah dan sarat simbolisme visual melalui arak-arakan gunungan hasil panen masyarakat.</p>
+                        </div>
+                        <span class="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-brand-blue to-brand-orange group-hover:w-full transition-all duration-500"></span>
+                    </div>
+
+                    <!-- Prosesi 3 -->
+                    <div class="reveal delay-300 group relative overflow-hidden flex items-start gap-3.5 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-orange/60 transition-all duration-300">
+                        <span class="shrink-0 w-9 h-9 rounded-full bg-brand-orange text-brand-dark font-bold text-xs flex items-center justify-center shadow transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-brand-blue group-hover:text-white">3</span>
+                        <div class="flex-1">
+                            <h3 class="text-sm sm:text-base font-bold text-brand-dark mb-1 group-hover:text-brand-blue transition-colors">Prosesi Puncak: Kenduri & Doa Bersama (Kembul Bujana)</h3>
+                            <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">Inti spiritual sedekah bumi ketika seluruh arak-arakan berkumpul di satu tempat untuk berdoa dan makan bersama tanpa sekat status sosial.</p>
+                        </div>
+                        <span class="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-brand-orange to-brand-blue group-hover:w-full transition-all duration-500"></span>
+                    </div>
+
+                    <!-- Prosesi 4 -->
+                    <div class="reveal delay-400 group relative overflow-hidden flex items-start gap-3.5 bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1.5 hover:border-brand-orange/60 transition-all duration-300">
+                        <span class="shrink-0 w-9 h-9 rounded-full bg-brand-navy text-white font-bold text-xs flex items-center justify-center shadow transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-brand-orange group-hover:text-brand-dark">4</span>
+                        <div class="flex-1">
+                            <h3 class="text-sm sm:text-base font-bold text-brand-dark mb-1 group-hover:text-brand-blue transition-colors">Penutup: Pagelaran Seni & Hiburan Rakyat</h3>
+                            <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">Ungkapan kegembiraan bersama melalui pertunjukan seni tradisional seperti wayang kulit, ketoprak, atau tayuban hingga larut malam.</p>
+                        </div>
+                        <span class="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-brand-orange to-brand-blue group-hover:w-full transition-all duration-500"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             LAYAR 4: RAGAM DAERAH
+        ========================== -->
+        <section id="agenda" class="relative min-h-screen md:h-screen md:snap-start pt-[72px] flex items-center justify-center bg-white overflow-hidden">
+            <div class="w-[92%] max-w-[1180px] mx-auto py-8 md:py-0">
+                <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8 reveal">
+
+                    <h2 class="mt-2.5 mb-2 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark tracking-tight">
+                        Ragam Daerah <span class="bg-gradient-to-r from-brand-blue to-brand-orange bg-clip-text text-transparent">Sedekah Bumi</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Hadir dengan nama, bentuk persembahan, dan kesenian pengiring yang beragam menyesuaikan kondisi geografis serta akulturasi budaya setempat.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div class="reveal delay-100 bg-gradient-to-b from-slate-50 to-white p-5 md:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="h-1.5 w-14 bg-brand-blue rounded-full mb-4 group-hover:w-full transition-all duration-500"></div>
+
+                        <h3 class="text-lg font-extrabold text-brand-dark mt-0.5 mb-2">Jawa Timur</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Sangat kental dengan nuansa kesenian rakyat yang dinamis (seperti Reog, Ludruk, atau Tayub) serta tradisi pelestarian sumber mata air desa.
+                        </p>
+                    </div>
+
+                    <div class="reveal delay-200 bg-gradient-to-b from-slate-50 to-white p-5 md:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="h-1.5 w-14 bg-brand-orange rounded-full mb-4 group-hover:w-full transition-all duration-500"></div>
+
+                        <h3 class="text-lg font-extrabold text-brand-dark mt-0.5 mb-2">Jawa Tengah & DI Yogyakarta</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Prosesi adat cenderung terstruktur dengan simbolisme keraton, kirab gunungan hasil bumi, serta penghormatan terhadap keseimbangan gunung dan laut.
+                        </p>
+                    </div>
+
+                    <div class="reveal delay-300 bg-gradient-to-b from-slate-50 to-white p-5 md:p-6 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group">
+                        <div class="h-1.5 w-14 bg-brand-dark rounded-full mb-4 group-hover:w-full transition-all duration-500"></div>
+
+                        <h3 class="text-lg font-extrabold text-brand-dark mt-0.5 mb-2">Jawa Barat & Banten</h3>
+                        <p class="text-xs sm:text-[13.5px] text-slate-600 leading-relaxed">
+                            Dikenal sebagai <em>Seren Taun</em>, rasa syukur berpusat pada siklus tanam padi (<em>pare</em>) dan penghormatan kepada Nyi Pohaci Sanghyang Asri.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             LAYAR 5: GALERI & ARSIP DOKUMENTASI + FOOTER
+        ========================== -->
+        <section id="indonesia-kaya" class="relative min-h-screen md:h-screen md:snap-start pt-[72px] flex flex-col justify-between bg-slate-50/90 overflow-hidden">
+
+            <!-- Konten Galeri Dokumentasi -->
+            <div class="flex-1 flex items-center justify-center w-[92%] max-w-[1180px] mx-auto py-8 md:py-0">
+                <div class="w-full">
+
+                    <!-- Header Galeri -->
+                    <div class="text-center max-w-2xl mx-auto mb-6 reveal">
+
+                        <h2 class="mt-2 mb-1.5 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-dark tracking-tight">
+                            Dokumentasi <span class="bg-gradient-to-r from-brand-blue to-brand-orange bg-clip-text text-transparent">Sedekah Bumi</span>
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            Kumpulan arsip foto kegiatan adat, kirab hasil bumi, doa bersama, dan kesenian rakyat.
+                        </p>
+                    </div>
+
+                    <!-- Template Grid 4 Slot Foto Dokumentasi -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+
+                        <!-- SLOT FOTO 1 -->
+                        <div class="gallery-card reveal delay-100 group relative overflow-hidden rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                             data-img="img/01.jpg"
+                             data-caption="Gugur Gunung & Persiapan Desa">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100 relative flex items-center justify-center">
+                                <img src="img/01.jpg"
+                                     alt="Dokumentasi 1 - Persiapan Desa"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="hidden flex-col items-center justify-center text-center p-4 text-slate-400">
+                                    <span class="text-2xl font-extrabold text-brand-blue/40 mb-1">+</span>
+                                    <span class="text-[11px] font-semibold text-slate-500">Slot Foto 01</span>
+                                    <span class="text-[10px] text-slate-400 mt-0.5">img/01.jpg</span>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            </div>
+                            <div class="p-3.5 bg-white">
+                                <h3 class="text-xs sm:text-sm font-bold text-brand-dark truncate mt-0.5">Gugur Gunung & Persiapan</h3>
+                                <p class="text-[11px] text-slate-500 truncate">Gotong royong warga menjelang acara</p>
+                            </div>
+                        </div>
+
+                        <!-- SLOT FOTO 2 -->
+                        <div class="gallery-card reveal delay-200 group relative overflow-hidden rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                             data-img="img/02.jpeg"
+                             data-caption="Kirab Budaya & Arak-Arakan Hasil Bumi">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100 relative flex items-center justify-center">
+                                <img src="img/02.jpeg"
+                                     alt="Dokumentasi 2 - Kirab Hasil Bumi"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="hidden flex-col items-center justify-center text-center p-4 text-slate-400">
+                                    <span class="text-2xl font-extrabold text-brand-orange/60 mb-1">+</span>
+                                    <span class="text-[11px] font-semibold text-slate-500">Slot Foto 02</span>
+                                    <span class="text-[10px] text-slate-400 mt-0.5">img/02.jpeg</span>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            </div>
+                            <div class="p-3.5 bg-white">
+                                <h3 class="text-xs sm:text-sm font-bold text-brand-dark truncate mt-0.5">Kirab Hasil Bumi</h3>
+                                <p class="text-[11px] text-slate-500 truncate">Arak-arakan gunungan hasil panen</p>
+                            </div>
+                        </div>
+
+                        <!-- SLOT FOTO 3 -->
+                        <div class="gallery-card reveal delay-300 group relative overflow-hidden rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                             data-img="img/03.jpeg"
+                             data-caption="Kenduri & Doa Bersama (Kembul Bujana)">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100 relative flex items-center justify-center">
+                                <img src="img/03.jpeg"
+                                     alt="Dokumentasi 3 - Doa Bersama"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="hidden flex-col items-center justify-center text-center p-4 text-slate-400">
+                                    <span class="text-2xl font-extrabold text-brand-blue/40 mb-1">+</span>
+                                    <span class="text-[11px] font-semibold text-slate-500">Slot Foto 03</span>
+                                    <span class="text-[10px] text-slate-400 mt-0.5">img/03.jpeg</span>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            </div>
+                            <div class="p-3.5 bg-white">
+                                <h3 class="text-xs sm:text-sm font-bold text-brand-dark truncate mt-0.5">Kenduri & Doa Bersama</h3>
+                                <p class="text-[11px] text-slate-500 truncate">Prosesi puncak rasa syukur warga</p>
+                            </div>
+                        </div>
+
+                        <!-- SLOT FOTO 4 -->
+                        <div class="gallery-card reveal delay-400 group relative overflow-hidden rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                             data-img="img/04.jpeg"
+                             data-caption="Pagelaran Seni & Hiburan Rakyat">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-slate-100 relative flex items-center justify-center">
+                                <img src="img/04.jpeg"
+                                     alt="Dokumentasi 4 - Hiburan Rakyat"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="hidden flex-col items-center justify-center text-center p-4 text-slate-400">
+                                    <span class="text-2xl font-extrabold text-brand-orange/60 mb-1">+</span>
+                                    <span class="text-[11px] font-semibold text-slate-500">Slot Foto 04</span>
+                                    <span class="text-[10px] text-slate-400 mt-0.5">img/04.jpeg</span>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                            </div>
+                            <div class="p-3.5 bg-white">
+                                <h3 class="text-xs sm:text-sm font-bold text-brand-dark truncate mt-0.5">Pagelaran Seni Rakyat</h3>
+                                <p class="text-[11px] text-slate-500 truncate">Kesenian tradisional penutup acara</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Preview Foto (Lightbox) -->
+            <div id="photoModal" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-brand-dark/85 backdrop-blur-sm p-4">
+                <div class="relative max-w-2xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+                    <button id="closeModal" type="button" aria-label="Tutup pratinjau" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-brand-dark/80 text-white hover:bg-brand-orange hover:text-brand-dark font-bold flex items-center justify-center transition">
+                        ✕
+                    </button>
+                    <div class="bg-slate-900 flex items-center justify-center max-h-[70vh] overflow-hidden">
+                        <img id="modalImg" src="" alt="Pratinjau Dokumentasi" class="max-h-[70vh] w-auto object-contain">
+                    </div>
+                    <div class="p-4 bg-white flex items-center justify-between">
+                        <p id="modalCaption" class="text-sm font-bold text-brand-dark"></p>
+                        <span class="text-[11px] text-slate-400">Tekan ESC untuk menutup</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Ramping di Bawah Layar Terakhir -->
+            <footer class="w-full py-4 text-center text-white bg-gradient-to-r from-brand-dark to-[#1b3156] border-t border-white/10">
+                <div class="w-[92%] max-w-[1180px] mx-auto">
+                    <small class="text-slate-300 text-[11.5px]">
+                        Copyright &copy; 2026 - PAI Kelompok 10. All Rights Reserved.
+                    </small>
+                </div>
+            </footer>
+
+        </section>
+
+    </main>
+
+    <!-- BACK TO TOP -->
+    <button id="backToTop" aria-label="Kembali ke atas" title="Kembali ke atas" class="fixed right-5 bottom-16 w-10 h-10 flex items-center justify-center rounded-xl bg-brand-orange text-brand-dark text-lg font-extrabold shadow-lg opacity-0 invisible translate-y-5 hover:bg-brand-blue hover:text-white transition-all duration-300 z-40">
+        ↑
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
